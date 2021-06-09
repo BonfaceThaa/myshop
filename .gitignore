@@ -1,0 +1,10 @@
+.idea
+
+# DLLs, binary and modules
+__pycache__/
+
+# data and databases
+myshop/db.sqlite3
+
+# media files
+myshop/media
