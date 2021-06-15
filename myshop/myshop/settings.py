@@ -133,3 +133,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # key to store cart information (product info(id, quantity, unit price))
 CART_SESSION_ID = 'cart'
+
+# Email information
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'thaabonface@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get("DJANGO_EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
