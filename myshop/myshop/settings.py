@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,17 @@ EMAIL_HOST_USER = 'thaabonface@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get("DJANGO_EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = '5snrkd3mbjzptb7k'
+BRAINTREE_PUBLIC_KEY = 'zkpw2348b4ykwgpq'
+BRAINTREE_PRIVATE_KEY = 'f8cab6e95c6118d850abd80a5d3092d7'
+
+import braintree
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
