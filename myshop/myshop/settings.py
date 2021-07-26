@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
+    'coupons.apps.CouponsConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -144,9 +147,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Braintree settings
-BRAINTREE_MERCHANT_ID = '5snrkd3mbjzptb7k'
-BRAINTREE_PUBLIC_KEY = 'zkpw2348b4ykwgpq'
-BRAINTREE_PRIVATE_KEY = 'f8cab6e95c6118d850abd80a5d3092d7'
+BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
+BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
+BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
 
 import braintree
 
