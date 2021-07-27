@@ -55,7 +55,7 @@ Your shopping cart
         "{{ cart.coupon.code }}" coupon
         ({{ cart.coupon.discount }}% off)
         </td>
-        <td colspan="4" l></td>
+        <td colspan="4"></td>
         <td class="num neg">
             - Ksh. {{ cart.get_discount|floatformat:2 }}
         </td>
@@ -64,7 +64,7 @@ Your shopping cart
     <tr class="total">
         <td>Total</td>
         <td colspan="4"></td>
-        <td class="num">Ksh. {{ cart.get_discount|floatformat:2 }}</td>
+        <td class="num">Ksh. {{ cart.get_total_price_after_discount|floatformat:2 }}</td>
     </tr>
     </tbody>
 </table>
