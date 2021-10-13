@@ -11,7 +11,9 @@ from .models import Order, OrderItem
 
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
-    content_disposition = 'attachment; filename={opts.verbose_name}.csv'
+    file_date = datetime.datetime.now()
+    file_date = file_date.strftime('-%b-%d-%Y')
+    content_disposition = f'attachment; filename={opts.verbose_name}{file_date}.csv'
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = content_disposition
     writer = csv.writer(response)
@@ -28,7 +30,7 @@ def export_to_csv(modeladmin, request, queryset):
     return response
 
 
-export_to_csv.short_description = 'Export to CSV'
+export_to_csv.short_description = 'Export orders to CSV'
 
 
 def order_pdf(obj):
