@@ -35,7 +35,7 @@ export_to_csv.short_description = 'Export orders to CSV'
 
 def order_pdf(obj):
     url = reverse('orders:admin_order_pdf', args=[obj.id])
-    return mark_safe(f'<a href="{url}">PDF</a>')
+    return mark_safe(f'<a href="{url}">Invoice PDF</a>')
 
 
 order_pdf.short_description = 'Invoice'
