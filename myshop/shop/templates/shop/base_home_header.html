@@ -1,0 +1,84 @@
+{% load static %}
+<div class="intro-slider-container mb-5">
+                <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl"
+                    data-owl-options='{
+                        "dots": true,
+                        "nav": false,
+                        "responsive": {
+                            "1200": {
+                                "nav": false,
+                                "dots": false
+                            }
+                        }
+                    }'>
+                    <div class="intro-slide" style="background-image: url({% static 'assets/images/demos/demo-21/slider/slide-1.png' %});">
+                        <div class="container intro-content">
+                            <div class="row">
+                                <div class="intro">
+                                    <div class="title">
+                                        <h3>WOMEN'S</h3>
+                                    </div>
+                                    <div class="content">
+                                        <h3>RUNNING &</h3>
+                                        <h3>TRAINING SHIRTS</h3>
+                                    </div>
+                                    <div class="price">
+                                        <h3>SAVE UP TO 30%</h3>
+                                        </div>
+                                    <div class="action">
+                                        <a href="category.html" class="btn btn-primary">
+                                            <span>DISCOVER NOW</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div><!-- End .row -->
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+                    <div class="intro-slide" style="background-image: url({% static 'assets/images/demos/demo-21/slider/slide-2.jpg' %});">
+                        <div class="container intro-content">
+                            <div class="row">
+                                <div class="intro">
+                                    <div class="title">
+                                        <h3 class="darkWhite">DEAL OF THE DAY</h3>
+                                    </div>
+                                    <div class="content">
+                                        <h3>IT'S TIME TO UPGRADE<br>YOUR HIKING KIT</h3>
+                                    </div>
+                                    <div class="price">
+                                        <h3 class="darkWhite">SAVE UP TO 15%</h3>
+                                    </div>
+                                    <div class="action">
+                                        <a href="category.html" class="btn btn-primary">
+                                            <span>DISCOVER NOW</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- End .row -->
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+
+
+                </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+                <span class="slider-loader"></span><!-- End .slider-loader -->
+            </div><!-- End .intro-slider-container -->
+
+<div class="container category-banner">
+                <div class="row">
+                    {% for c in categories|slice:":4" %}
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <a href="category.html">
+                            <img src="{% static 'assets/images/demos/demo-21/banner/footware.jpg' %}">
+                        </a>
+                        <div class="banner-content">
+                            <a href="{{ c.get_absolute_url }}"><h3 class="category"> {{ c.name }} </h3></a>
+                            <a href="{{ c.get_absolute_url }}" class="action">SHOP NOW</a>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
