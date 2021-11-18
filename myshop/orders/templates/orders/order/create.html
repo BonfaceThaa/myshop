@@ -1,34 +1,99 @@
-{% extends "shop/base.html" %}
-
+{% extends "shop/base_core.html" %}
+{% load widget_tweaks %}
 {% block title %}
 Checkout
 {% endblock %}
 
 {% block content %}
-<h1>Checkout</h1>
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
 
-<div class="order-info">
-    <h3>Your order</h3>
-    <ul>
-        {% for item in cart %}
-        <li>
-            {{ item.quantity }} X {{ item.product.name }}
-            <span>Ksh.{{ item.total_price|floatformat:2 }}</span>
-        </li>
-        {% endfor %}
-        {% if cart.coupon %}
-        <li>
-            "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
-            <span class="neg"> - Ksh.{{ cart.get_discount|floatformat:2 }}</span>
-        </li>
-        {% endif %}
-    </ul>
-    <p>Total: Ksh.{{ cart.get_total_price_after_discount|floatformat:2 }}</p>
-    </div>
+            <div class="page-content">
+            	<div class="checkout">
+	                <div class="container">
+            			<form action="#" method="post">
+                            {% csrf_token %}
+		                	<div class="row">
+		                		<div class="col-lg-9">
+		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>First Name *</label>
+                                                {% render_field form.first_name class="form-control" %}
+		                					</div><!-- End .col-sm-6 -->
 
-    <form method="post" class="order-form">
-        {{ form.as_p }}
-        <p><input type="submit" value="Place Order"></p>
-        {% csrf_token %}
-    </form>
+		                					<div class="col-sm-6">
+		                						<label>Last Name *</label>
+		                						{% render_field form.last_name class="form-control" %}
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+	            						<label>Email *</label>
+	            						{% render_field form.email class="form-control" type="email" %}
+
+                                        <label>Address *</label>
+	            						{% render_field form.address class="form-control" %}
+
+	            						<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Town / City *</label>
+		                						{% render_field form.city class="form-control" %}
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Postcode / ZIP *</label>
+		                						{% render_field form.postal_code class="form-control" %}
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+		                		</div><!-- End .col-lg-9 -->
+		                		<aside class="col-lg-3">
+		                			<div class="summary">
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+
+		                					<tbody>
+                                            {% for item in cart %}
+		                						<tr>
+		                							<td><a href="#">{{ item.quantity }} X {{ item.product.name }}</a></td>
+		                							<td>Ksh. {{ item.total_price|floatformat:2 }}</td>
+		                						</tr>
+                                            {% endfor %}
+                                            {% if cart.coupon %}
+		                						<tr class="summary-subtotal">
+		                							<td>"{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off):</td>
+		                							<td>Ksh.{{ cart.get_discount|floatformat:2 }}</td>
+		                						</tr><!-- End .summary-subtotal -->
+                                            {% endif %}
+		                						<tr class="summary-total">
+		                							<td>Total:</td>
+		                							<td>Ksh. {{ cart.get_total_price_after_discount|floatformat:2 }}</td>
+		                						</tr><!-- End .summary-total -->
+		                					</tbody>
+		                				</table><!-- End .table table-summary -->
+
+		                				<button type="submit" class="btn btn-outline-primary-2">
+		                					<span>Place Order</span>
+		                				</button>
+		                			</div><!-- End .summary -->
+		                		</aside><!-- End .col-lg-3 -->
+		                	</div><!-- End .row -->
+            			</form>
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
 {% endblock %}
