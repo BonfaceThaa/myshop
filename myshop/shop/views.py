@@ -30,5 +30,9 @@ def product_detail(request, id, slug):
     return render(request, 'shop/product/detail.html', {'product': product, 'cart_product_form': cart_product_form})
 
 
+def custom_not_found(request, exception):
+    return render(request, '404.html', status=404)
+
+
 
 

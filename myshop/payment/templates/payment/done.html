@@ -1,6 +1,23 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base_core.html" %}
 {% block title %}Payment successful{% endblock %}
 {% block content %}
-<h1>Your payment was successful</h1>
-<p>Your payment has been processed successfully.</p>
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Payment status</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+        	<div class="error-content text-center" style="background-image: url(assets/images/backgrounds/error-bg.jpg)">
+            	<div class="container">
+            		<h1 class="error-title">Your payment was successful</h1><!-- End .error-title -->
+            		<p>Your payment has been processed successfully</p>
+            		<a href="/" class="btn btn-outline-primary-2 btn-minwidth-lg">
+            			<span>Continue shopping</span>
+            			<i class="icon-long-arrow-right"></i>
+            		</a>
+            	</div><!-- End .container -->
+        	</div><!-- End .error-content text-center -->
 {% endblock %}

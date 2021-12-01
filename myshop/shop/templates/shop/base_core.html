@@ -81,9 +81,15 @@
                             </a>
                         </div><!-- End .compare-dropdown -->
                         <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a href="/cart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
-                                <span class="cart-count">2</span>
+                                {% with total_items=cart|length %}
+                                {% if total_items > 0 %}
+                                <span class="cart-count">{{total_items}}</span>
+                                {% else %}
+                                <span class="cart-count">0</span>
+                                {% endif %}
+                                {% endwith %}
                             </a>
 
                         </div><!-- End .cart-dropdown -->
@@ -273,7 +279,7 @@
                                 </li>
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="faq.html">FAQs</a></li>
-                                <li><a href="404.html">Error 404</a></li>
+                                <li><a href="../../../templates/404.html">Error 404</a></li>
                                 <li><a href="coming-soon.html">Coming Soon</a></li>
                             </ul>
                         </li>
