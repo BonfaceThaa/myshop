@@ -7,10 +7,10 @@ from cart.forms import CartAddProductForm
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).exclude(deleted_at__isnull=False)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(category=category)
+        products = products.filter(category=category).exclude(deleted_at__isnull=False)
 
     return render(request, 'shop/product/list.html', {
         'category': category,
