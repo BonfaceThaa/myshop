@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.utils import timezone
 
-from .models import Category, Product
+from .models import Category, Product, ProductImage
+
+
+class ProductImageAdmin(admin.StackedInline):
+    model = ProductImage
 
 
 @admin.register(Category)
@@ -17,6 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ('name',)}
     exclude = 'deleted_at',
+    inlines = [ProductImageAdmin]
 
     def get_queryset(self, request):
         """

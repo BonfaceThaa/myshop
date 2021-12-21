@@ -41,8 +41,20 @@
                                 <div class="product demo21">
                                     <figure class="product-media">
                                         <a href="{{ product.get_absolute_url }}">
-                                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="Product image" class="product-image">
+                                            {% for image in product.images.all %}
+                                            {% if image.image_type == 'PRI'%}
+                                            <img src="{{image.image.url}}" alt="Product image" class="product-image">
+                                            {% endif %}
+                                            {% empty %}
+                                            <img src="{% static 'img/no_image.png' %}" alt="Product image" class="product-image">
+                                        {% endfor %}
                                         </a>
+<!--                                        {% for image in product.images.all %}-->
+<!--                                        {% if image.image_type == 'PRI'%}-->
+<!--                                        <img src="{{image.image.url}}">-->
+<!--                                        {% endif %}-->
+<!--                                        <img src="{% if image %}{{ image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="Product image" class="product-image">-->
+<!--                                        {% endfor %}-->
 
                                     </figure><!-- End .product-media -->
 
