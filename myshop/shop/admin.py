@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.utils import timezone
 
 from .models import Category, Product, ProductImage
+from .forms import ProductImageFormset
 
 
 class ProductImageAdmin(admin.StackedInline):
+    formset = ProductImageFormset
     model = ProductImage
 
 

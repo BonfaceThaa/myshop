@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.core.exceptions import ValidationError
+
 
 TYPE_OF_IMAGE = [
         ('PRI', 'Primary'),
@@ -55,3 +57,5 @@ class ProductImage(models.Model):
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     image_type = models.CharField(max_length=3, choices=TYPE_OF_IMAGE, default='PRI')
 
+    def __str__(self):
+        return self.image_type
