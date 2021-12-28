@@ -1,5 +1,6 @@
 {% extends "shop/base_core.html" %}
 {% load static %}
+{% load humanize %}
 {% load widget_tweaks %}
 {% block title %}
 {{ product.name }}
@@ -53,7 +54,7 @@
                                     </div><!-- End .rating-container -->
 
                                     <div class="product-price">
-                                        Ksh. {{ product.price }}
+                                        Ksh. {{ product.price|intcomma }}
                                     </div><!-- End .product-price -->
 
                                     <div class="product-content">

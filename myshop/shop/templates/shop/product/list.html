@@ -1,5 +1,6 @@
 {% extends "shop/base_core.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
@@ -57,7 +58,7 @@
                                         </div><!-- End .product-cat -->
                                         <h3 class="product-title"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                            <span class="cur-price">Ksh. {{ product.price }}</span>
+                                            <span class="cur-price">Ksh. {{ product.price|intcomma }}</span>
                                         </div><!-- End .product-price -->
                                         <div class="ratings-container">
                                             <div class="ratings">

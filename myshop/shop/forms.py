@@ -8,7 +8,7 @@ class ProductImageFormset(BaseInlineFormSet):
         InlineFormSet function that validates each product has at least one Primary image in the case it has images.
         :return: validation error if product has images and none of primary type
         """
-        super(ProductImageFormset, self).clean()
+        super().clean()
         primary_images = 0
         other_images = 0
         for form in self.forms:
