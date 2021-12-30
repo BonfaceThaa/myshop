@@ -19,6 +19,8 @@ from django.conf import settings
 from django.conf.urls import handler404
 from django.conf.urls.static import static
 
+from accounts.views import register
+
 admin.site.site_header = "myShop Admin"
 admin.site.site_title = "myShop Admin"
 admin.site.site_index_title = "myShop Admin"
@@ -30,6 +32,11 @@ urlpatterns = [
     path('payment', include('payment.urls', namespace='payment')),
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('', include('shop.urls', namespace='shop')),
+]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register', register, name='register')
 ]
 
 if settings.DEBUG:
