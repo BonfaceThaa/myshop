@@ -19,6 +19,15 @@
 	            			<h3>Register</h3>
 							<div class="tab-content">
 							    <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+									{% if messages %}
+									<div class="shadow-custom messages alert alert-danger
+									col-lg-8 mx-auto text-center">
+									{% for message in messages %}
+									{{ message }}
+									<a href="" class="close">x</a>
+									{% endfor %}
+									</div>
+									{% endif %}
 							    	<form method="post">
                                         {% csrf_token %}
 							    		<div class="form-group">
@@ -42,18 +51,21 @@
                                         <div class="form-group">
 							    			<label for="singin-email-2">Email *</label>
                                             {% render_field form.email class="form-control" id="singin-email-2" name="singin-email" %}
+											{{ form.email.errors }}
 <!--							    			<input type="text" class="form-control" id="singin-email-2" name="singin-email" required>-->
 							    		</div><!-- End .form-group -->
 
 							    		<div class="form-group">
 							    			<label for="singin-password-2">Password *</label>
                                             {% render_field form.password1 class="form-control" id="singin-password-2" name="singin-password" %}
+											<span style="text-decoration-color: #6f42c1">{{ form.password1.errors }}</span>
 <!--							    			<input type="password" class="form-control" id="singin-password-2" name="singin-password" required>-->
 							    		</div><!-- End .form-group -->
 
                                         <div class="form-group">
 							    			<label for="singin-password-2">Password *</label>
                                             {% render_field form.password2 class="form-control" id="singin-password-2" name="singin-password" %}
+											{{ form.password2.errors }}
 <!--							    			<input type="password" class="form-control" id="singin-password-2" name="singin-password" required>-->
 							    		</div><!-- End .form-group -->
 							    		<div class="form-footer">
@@ -61,16 +73,9 @@
 			                					<span>Register</span>
 			            						<i class="icon-long-arrow-right"></i>
 			                				</button>
-
-			                				<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="signin-remember-2">
-												<label class="custom-control-label" for="signin-remember-2">Remember Me</label>
-											</div><!-- End .custom-checkbox -->
-
-											<a href="#" class="forgot-link">Forgot Your Password?</a>
 							    		</div><!-- End .form-footer -->
 							    	</form>
-                                    <a href="#" class="forgot-link">Don't have an account? Register here</a>
+                                    <a href="#" class="forgot-link">Have an account? Sign In here</a>
 							    </div><!-- .End .tab-pane -->
 
 							</div><!-- End .tab-content -->
