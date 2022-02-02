@@ -15,13 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import login, authenticate
-from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import handler404
 from django.conf.urls.static import static
-
-from accounts.views import register
 
 admin.site.site_header = "myShop Admin"
 admin.site.site_title = "myShop Admin"
@@ -29,22 +26,12 @@ admin.site.site_index_title = "myShop Admin"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('payment', include('payment.urls', namespace='payment')),
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('', include('shop.urls', namespace='shop')),
-]
-
-urlpatterns += [
-    path('accounts/password_change/', auth_views.PasswordChangeView.as_view(success_url='/'), name='password_change'),
-    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
-         name='password_reset_confirm'),
-    path('password_reset/complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/register', register, name='register'),
 ]
 
 if settings.DEBUG:
