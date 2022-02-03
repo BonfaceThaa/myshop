@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 
-from .forms import RegisterForm, ProfileForm
+from .forms import RegisterForm, ProfileForm, UpdateUserForm
+from .models import Profile
 
 
 def register(request):
@@ -21,10 +22,13 @@ def register(request):
 
 def profile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
             return redirect('profile')
     else:
-        form = ProfileForm(initial={}, instance=request.user.profile)
-    return render(request, 'profile/dashboard.html', {'form': form})
+        profile_form = ProfileForm(initial={}, instance=request.user.profile)
+        user_form = UpdateUserForm(initial={}, instance=request.user)
+    return render(request, 'profile/dashboard.html', {'profile_form': profile_form, "user_form": user_form})
