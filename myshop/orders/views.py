@@ -11,6 +11,7 @@ from .models import OrderItem, Order
 from .forms import OrderCreateForm
 
 from cart.cart import Cart
+from accounts.models import Profile
 
 from .tasks import order_created
 
@@ -24,6 +25,8 @@ def order_create(request):
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
+            if request.user.is_authenticated:
+                order.customer = request.user
             order.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
@@ -36,7 +39,17 @@ def order_create(request):
             request.session['order_id'] = order.id
             return redirect(reverse('payment:process'))
     else:
-        form = OrderCreateForm()
+        if request.user.is_authenticated:
+            form = OrderCreateForm(initial={
+                "first_name": request.user.first_name,
+                "last_name": request.user.last_name,
+                "email": request.user.email,
+                "address": request.user.profile.address,
+                "postal_code": request.user.profile.postal_code,
+                "city": request.user.profile.city
+            })
+        else:
+            form = OrderCreateForm()
     return render(request,
                   'orders/order/create.html',
                   {'cart': cart, 'form': form})

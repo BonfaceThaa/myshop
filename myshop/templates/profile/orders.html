@@ -1,0 +1,81 @@
+{% extends "shop/base_core.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Account</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                {% include 'profile/profile_sidebar.html' %}
+
+                <div class="col-md-8 col-lg-9">
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade show active" id="tab-orders" role="tabpanel"
+                             aria-labelledby="tab-orders-link">
+                            <h4>My orders</h4>
+                            <table class="table table-cart table-mobile">
+                                <thead>
+                                <tr>
+                                    <th>Order id</th>
+                                    <th>Ordered on</th>
+                                    <th>Amount</th>
+                                    <th>Paid</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    {% for order in page_obj %}
+                                    <td class="product-col">{{ order.order_id }}</td>
+                                    <td class="product-col">{{ order.created }}</td>
+                                    <td class="price-col">{{ order.get_total_cost }}</td>
+                                    {% if order.paid == True %}
+                                    <td class="price-col">Yes</td>
+                                    {% else %}
+                                    <td class="price-col">No</td>
+                                    {% endif %}
+
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table><!-- End .table table-wishlist -->
+                            <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+                            </div>
+                            <p>No order has been made yet.</p>
+                            <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
+                                    class="icon-long-arrow-right"></i></a>
+                        </div><!-- .End .tab-pane -->
+                    </div><!-- .End .tab-pane -->
+                </div>
+            </div><!-- End .col-lg-9 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .dashboard -->
+</div><!-- End .page-content -->
+{% endblock%}

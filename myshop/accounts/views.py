@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
+from django.core.paginator import Paginator
 
 from .forms import RegisterForm, ProfileForm, UpdateUserForm
 from .models import Profile
+from orders.models import Order
 
 
 def register(request):
@@ -32,3 +34,11 @@ def profile(request):
         profile_form = ProfileForm(initial={}, instance=request.user.profile)
         user_form = UpdateUserForm(initial={}, instance=request.user)
     return render(request, 'profile/dashboard.html', {'profile_form': profile_form, "user_form": user_form})
+
+
+def customer_orders(request):
+    orders = Order.objects.filter(customer=request.user)
+    paginator = Paginator(orders, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'profile/orders.html', {'page_obj': page_obj})
