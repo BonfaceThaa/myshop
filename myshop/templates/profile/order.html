@@ -1,0 +1,83 @@
+{% extends "shop/base_core.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Account</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                {% include 'profile/profile_sidebar.html' %}
+
+                <div class="col-md-8 col-lg-9">
+                    <table class="table table-cart table-mobile">
+                                <thead>
+                                <tr>
+                                    <th>Order id</th>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ item.order.order_id }}</td>
+                                    <td><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a></td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.get_cost }}</td>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                </div>
+                <aside class="col-lg-3">
+                    <div class="summary">
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+
+		                					<tbody>
+		                						<tr>
+		                							<td><a href="#"></a></td>
+		                							<td>Ksh. </td>
+		                						</tr>
+		                						<tr class="summary-subtotal">
+		                							<td></td>
+		                							<td>Ksh.</td>
+		                						</tr><!-- End .summary-subtotal -->
+		                						<tr class="summary-total">
+		                							<td>Total:</td>
+		                							<td>Ksh. </td>
+		                						</tr><!-- End .summary-total -->
+		                					</tbody>
+		                				</table><!-- End .table table-summary -->
+
+		                				<button type="submit" class="btn btn-outline-primary-2">
+		                					<span>Place Order</span>
+		                				</button>
+		                			</div><!-- End .summary -->
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .col-lg-9 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .dashboard -->
+</div><!-- End .page-content -->
+{% endblock%}

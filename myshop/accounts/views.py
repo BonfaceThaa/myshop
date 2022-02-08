@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 
 from .forms import RegisterForm, ProfileForm, UpdateUserForm
 from .models import Profile
-from orders.models import Order
+from orders.models import Order, OrderItem
 
 
 def register(request):
@@ -42,3 +42,9 @@ def customer_orders(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'profile/orders.html', {'page_obj': page_obj})
+
+
+def customer_order_details(request, order_id):
+    order = Order.objects.get(order_id=order_id)
+    order_items = order.items.all()
+    return render(request, "profile/order.html", {"order": order, "items": order_items})

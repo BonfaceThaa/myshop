@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from .views import register, profile, customer_orders
+from .views import register, profile, customer_orders, customer_order_details
 
 urlpatterns = [
     path('password_change/', auth_views.PasswordChangeView.as_view(success_url='/'), name='password_change'),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('accounts/register', register, name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('index/', profile, name='profile'),
-    path('index/orders', customer_orders, name='customer_orders')
+    path('index/orders', customer_orders, name='customer_orders'),
+    path('index/order/<str:order_id>', customer_order_details, name='customer_order'),
 ]
