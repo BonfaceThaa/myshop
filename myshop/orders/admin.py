@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from .models import Order, OrderItem
+from .models import Order, OrderItem, OrderComplaint
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -56,3 +56,9 @@ class OrderAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(OrderComplaint)
+class OrderComplaintAdmin(admin.ModelAdmin):
+    list_display = ['order_id', 'email']
+

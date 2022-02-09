@@ -1,0 +1,54 @@
+{% extends "shop/base_core.html" %}
+{% load widget_tweaks %}
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="checkout">
+	                <div class="container">
+            			<form action="#" method="post">
+                            {% csrf_token %}
+		                	<div class="row">
+		                		<div class="col-lg-9">
+		                			<h2 class="checkout-title">Refund request</h2><!-- End .checkout-title -->
+		                				<div class="row">
+											{{ form.non_field_errors }}
+											<div class="col-sm-6">
+		                						<label>Order ID *</label>
+                                                {% render_field form.order_id class="form-control" %}
+												{{ form.order_id.errors }}
+		                					</div>
+											<div class="col-sm-6">
+		                						<label>Email *</label>
+                                                {% render_field form.email class="form-control" %}
+												{{ form.email.errors }}
+		                					</div>
+											<div class="col-sm-12">
+		                						<label>Message *</label>
+                                                {% render_field form.message class="form-control" %}
+												{{ form.message.errors }}
+		                					</div>
+                                            <button type="submit" class="btn btn-outline-primary-2">
+		                					<span>Submit request</span>
+		                				</button>
+		                				</div><!-- End .row -->
+
+		                		</div><!-- End .col-lg-9 -->
+		                	</div><!-- End .row -->
+            			</form>
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+{% endblock %}

@@ -7,8 +7,8 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
-from .models import OrderItem, Order
-from .forms import OrderCreateForm
+from .models import OrderItem, Order, OrderComplaint
+from .forms import OrderCreateForm, OrderComplaintForm
 
 from cart.cart import Cart
 from accounts.models import Profile
@@ -65,3 +65,18 @@ def admin_order_pdf(request, order_id):
         settings.STATICFILES_DIRS[0] + 'css/pdf.css'
     )])
     return response
+
+
+def order_complaint(request):
+    if request.method == 'POST':
+        form = OrderComplaintForm(request.POST)
+        if form.is_valid():
+            complaint = OrderComplaint()
+            complaint.order_id = form.cleaned_data['order_id']
+            complaint.email = form.cleaned_data['email']
+            complaint.message = form.cleaned_data['message']
+            complaint.save()
+            return redirect('profile')
+    else:
+        form = OrderComplaintForm()
+    return render(request, 'orders/order/complaint_form.html', {'form': form})

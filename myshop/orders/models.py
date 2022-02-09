@@ -32,6 +32,8 @@ class Order(models.Model):
                                    validators=[MinValueValidator(0),
                                                MaxValueValidator(100)]
                                    )
+    refund_requested = models.BooleanField(default=False)
+    refund_granted = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-created',)
@@ -58,3 +60,12 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+class OrderComplaint(models.Model):
+    order_id = models.CharField(max_length=10)
+    email = models.EmailField(max_length=250)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.order_id
