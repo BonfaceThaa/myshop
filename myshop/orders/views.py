@@ -9,7 +9,6 @@ from django.template.loader import render_to_string
 
 from .models import OrderItem, Order, OrderComplaint
 from .forms import OrderCreateForm, OrderComplaintForm
-
 from cart.cart import Cart
 from accounts.models import Profile
 
@@ -51,7 +50,7 @@ def order_create(request):
         else:
             form = OrderCreateForm()
     return render(request,
-                  'orders/order/create.html',
+                  'orders/order/order_create.html',
                   {'cart': cart, 'form': form})
 
 
@@ -79,4 +78,4 @@ def order_complaint(request):
             return redirect('profile')
     else:
         form = OrderComplaintForm()
-    return render(request, 'orders/order/complaint_form.html', {'form': form})
+    return render(request, 'orders/order/order_complaint.html', {'form': form})

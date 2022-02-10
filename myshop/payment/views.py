@@ -1,11 +1,10 @@
 import braintree
 
-from django.shortcuts import render
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 
-from orders.models import Order
 from .tasks import payment_completed
+from orders.models import Order
 
 gateway = braintree.BraintreeGateway(settings.BRAINTREE_CONF)
 
@@ -34,12 +33,12 @@ def payment_process(request):
             return redirect('payment:canceled')
     else:
         client_token = gateway.client_token.generate()
-        return render(request, 'payment/process.html', {'order': order, 'client_token': client_token})
+        return render(request, 'payment/payment_process.html', {'order': order, 'client_token': client_token})
 
 
 def payment_done(request):
-    return render(request, 'payment/done.html')
+    return render(request, 'payment/payment_done.html')
 
 
 def payment_canceled(request):
-    return render(request, 'payment/canceled.html')
+    return render(request, 'payment/payment_canceled.html')

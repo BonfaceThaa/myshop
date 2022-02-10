@@ -4,7 +4,6 @@ from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 
 from .forms import RegisterForm, ProfileForm, UpdateUserForm
-from .models import Profile
 from orders.models import Order, OrderItem, OrderComplaint
 
 
@@ -23,7 +22,7 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-def profile(request):
+def account_profile(request):
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -34,18 +33,18 @@ def profile(request):
     else:
         profile_form = ProfileForm(initial={}, instance=request.user.profile)
         user_form = UpdateUserForm(initial={}, instance=request.user)
-    return render(request, 'profile/dashboard.html', {'profile_form': profile_form, "user_form": user_form})
+    return render(request, 'profile/account_profile.html', {'profile_form': profile_form, "user_form": user_form})
 
 
-def customer_orders(request):
+def account_orders(request):
     orders = Order.objects.filter(customer=request.user)
     paginator = Paginator(orders, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'profile/orders.html', {'page_obj': page_obj})
+    return render(request, 'profile/account_orders.html', {'page_obj': page_obj})
 
 
-def customer_order_details(request, order_id):
+def account_order_details(request, order_id):
     order = Order.objects.get(order_id=order_id)
     print("Order_item: ", order.created)
     order_items = order.items.all()
@@ -55,4 +54,4 @@ def customer_order_details(request, order_id):
         context['complaint'] = complaint
     except ObjectDoesNotExist:
         pass
-    return render(request, "profile/order.html", context)
+    return render(request, "profile/account_order_details.html", context)
