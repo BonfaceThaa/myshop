@@ -19,6 +19,7 @@
                 {% include 'profile/profile_sidebar.html' %}
 
                 <div class="col-md-8 col-lg-9">
+                    <h4>Order details</h4>
                     <table class="table table-cart table-mobile">
                                 <thead>
                                 <tr>
@@ -41,6 +42,12 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                    {% if complaint %}
+                    <p>
+                        <h4>Refund request</h4>
+                        <p>{{complaint.message }}</p>
+                    </p>
+                    {% endif %}
                 </div>
                 <aside class="col-lg-3">
                     <div class="summary">
@@ -49,30 +56,23 @@
 		                				<table class="table table-summary">
 		                					<thead>
 		                						<tr>
-		                							<th>Product</th>
-		                							<th>Total</th>
+		                							<th>Order ID</th>
+		                							<th>date of order</th>
 		                						</tr>
 		                					</thead>
 
 		                					<tbody>
+                                            {% if order %}
 		                						<tr>
-		                							<td><a href="#"></a></td>
-		                							<td>Ksh. </td>
+		                							<td>{{ order.order_id }}</td>
+		                							<td>{{ order.created }}</td>
 		                						</tr>
-		                						<tr class="summary-subtotal">
-		                							<td></td>
-		                							<td>Ksh.</td>
-		                						</tr><!-- End .summary-subtotal -->
-		                						<tr class="summary-total">
-		                							<td>Total:</td>
-		                							<td>Ksh. </td>
-		                						</tr><!-- End .summary-total -->
+                                            {% endif %}
 		                					</tbody>
 		                				</table><!-- End .table table-summary -->
+                        <br>
+                        <a href="{% url 'orders:oder_complaint' %}" class="btn btn-outline-primary-2">Request refund</a>
 
-		                				<button type="submit" class="btn btn-outline-primary-2">
-		                					<span>Place Order</span>
-		                				</button>
 		                			</div><!-- End .summary -->
                 </aside><!-- End .col-lg-3 -->
             </div><!-- End .col-lg-9 -->

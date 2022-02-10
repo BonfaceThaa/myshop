@@ -1,10 +1,11 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 
 from .forms import RegisterForm, ProfileForm, UpdateUserForm
 from .models import Profile
-from orders.models import Order, OrderItem
+from orders.models import Order, OrderItem, OrderComplaint
 
 
 def register(request):
@@ -46,5 +47,12 @@ def customer_orders(request):
 
 def customer_order_details(request, order_id):
     order = Order.objects.get(order_id=order_id)
+    print("Order_item: ", order.created)
     order_items = order.items.all()
-    return render(request, "profile/order.html", {"order": order, "items": order_items})
+    context = {"order": order, "items": order_items}
+    try:
+        complaint = OrderComplaint.objects.get(order_id=order_id)
+        context['complaint'] = complaint
+    except ObjectDoesNotExist:
+        pass
+    return render(request, "profile/order.html", context)
