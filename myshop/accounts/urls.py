@@ -3,6 +3,8 @@ from django.contrib.auth import views as auth_views
 
 from .views import register, account_profile, account_orders, account_order_details
 
+app_name = 'accounts'
+
 urlpatterns = [
     path('password_change/', auth_views.PasswordChangeView.as_view(success_url='/'), name='password_change'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

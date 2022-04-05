@@ -1,3 +1,5 @@
+import logging
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
@@ -6,8 +8,13 @@ from django.core.paginator import Paginator
 from .forms import RegisterForm, ProfileForm, UpdateUserForm
 from orders.models import Order, OrderItem, OrderComplaint
 
+logger = logging.getLogger(__name__)
+
 
 def register(request):
+    """
+    Register a user and redirect to home page if successful.
+    """
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
