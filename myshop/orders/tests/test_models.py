@@ -21,5 +21,6 @@ class TestOrderModel:
 
     def test_order_get_absolute_url(self, admin_user, order_data, client):
         order = Order.objects.create(customer=admin_user, **order_data)
+        client.force_login(admin_user)
         response = client.get(reverse("accounts:account_order_details", args=[order.order_id]))
         assert response.status_code == 200

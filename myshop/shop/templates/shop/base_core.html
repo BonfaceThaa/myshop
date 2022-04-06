@@ -49,7 +49,7 @@
                                 <a href="#">Links</a>
                                 <ul>
                                     {% if user.is_authenticated %}
-                                    <li><a href="{% url 'account_profile' %}"><i class="icon-user"></i>Profile</a></li>
+                                    <li><a href="{% url 'accounts:account_profile' %}"><i class="icon-user"></i>Profile</a></li>
                                     <li><a href="{% url 'logout' %}"></i>Logout</a></li>
                                     {% else %}
                                     <li><a href="{% url 'login' %}"><i class="icon-user"></i>Login</a></li>

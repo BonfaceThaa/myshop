@@ -42,7 +42,7 @@ class Order(models.Model):
         return f'Order {self.id}'
 
     def get_absolute_url(self):
-        return reverse("account_order_details", args=[self.order_id])
+        return reverse("accounts:account_order_details", args=[self.order_id])
 
     def get_total_cost(self):
         total_cost = sum(item.get_cost() for item in self.items.all())
