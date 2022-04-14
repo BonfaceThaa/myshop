@@ -68,4 +68,4 @@ class OrderComplaint(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return self.order_id
+        return str(self.order_id)
