@@ -14,6 +14,7 @@ from shop.tests.factories import ProductFactory
 
 fake = Faker()
 
+
 @factory.django.mute_signals(pre_save)
 class OrderFactory(DjangoModelFactory):
     class Meta:
