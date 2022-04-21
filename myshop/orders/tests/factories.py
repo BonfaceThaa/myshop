@@ -1,10 +1,7 @@
-import random
-
 import factory
 from factory import SubFactory
 from factory.django import DjangoModelFactory
 from faker import Faker
-from faker.providers import DynamicProvider
 
 from django.db.models.signals import pre_save
 

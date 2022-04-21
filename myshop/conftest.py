@@ -1,9 +1,18 @@
 import pytest
+from pytest_factoryboy import register
 
 from django.contrib.auth.models import User
 
 from shop.models import Category, Product, ProductImage
 from orders.models import Order
+from shop.tests.factories import ProductFactory, CategoryFactory
+from orders.tests.factories import OrderFactory, OrderItemFactory, OrderComplaintFactory
+
+register(CategoryFactory)
+register(ProductFactory)
+register(OrderFactory)
+register(OrderItemFactory)
+register(OrderComplaintFactory)
 
 
 @pytest.fixture(autouse=True)
@@ -24,38 +33,6 @@ def user_data():
 def admin_user(user_data, db):
     admin = User.objects.create_user(**user_data)
     return admin
-
-
-@pytest.fixture()
-def category_data():
-    data = {
-        "name": "Electronics",
-        "slug": "electronics"
-    }
-    return data
-
-
-@pytest.fixture()
-def test_category(category_data):
-    category = Category.objects.create(**category_data)
-    return category
-
-
-@pytest.fixture()
-def product_data(test_category):
-    data = {
-        "category": test_category,
-        "name": 'Portable Wireless Bluetooth Speakers',
-        "slug": 'portable-wireless-bluetooth-speakers',
-        "price": 699.00
-    }
-    return data
-
-
-@pytest.fixture()
-def test_product(product_data):
-    product = Product.objects.create(**product_data)
-    return product
 
 
 @pytest.fixture()
