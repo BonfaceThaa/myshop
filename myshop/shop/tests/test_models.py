@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.core.files.images import ImageFile
 
 from shop.models import Category, Product, ProductImage
-from .factories import CategoryFactory, ProductFactory
 
 
 @pytest.mark.django_db

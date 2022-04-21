@@ -7,12 +7,12 @@
 Update the ```BASE_DIR``` configuration in the ```base.py``` file to point to the parent directory.
 
 ## Setting up uWSGI application server
-1. Install pre-requisite:
+1. Install pre-requisite.
 ```
 apt install build-essential
 ``` 
 
-2. Install uWSGI using pip:
+2. Install uWSGI using pip.
 ```
 pip install uwsgi
 ```
@@ -101,3 +101,34 @@ $ sudo nginx -s reload
 ```
 
 5. Add the appropriate domain name to the ```ALLOWED_HOSTS``` configuration in the ```prod.py``` settings file
+
+- All products
+- Category products X
+- product detail view X
+- shopping cart view X
+- checkout view X
+- payment view
+- payment confirmation/notification page
+- 500 view X
+- 400 view X
+
+Testing
+- accounts
+    - signals(update_user_profile)
+    - views(register,account_profile,account_orders, account_order_details)
+- cart
+    - views(cart_add, cart_remove, cart_details)
+    - cart(TODO research testing of classes)
+- coupon
+    - views(coupon_apply)
+- orders
+    - views(order_create, ord_admin_pdf, order_complaint)
+    - forms(OrderComplaintForm: clean_order_id)
+    - signals(save_create_order_id)
+- payment
+    - views(payment_process)
+    - tasks (payment_completed)
+- shop
+    - forms(ProductImageFormset(clean))
+
+# Remember to to check for template tags and URLs to test

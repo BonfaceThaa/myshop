@@ -2,9 +2,11 @@
 
 # DLLs, binary and modules
 __pycache__/
+.pytest_cache
 
 # data and databases
 myshop/db.sqlite3
+data.json
 
 # media and static files
 myshop/media
