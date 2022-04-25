@@ -36,7 +36,7 @@ def order_create(request):
             cart.clear()
             order_created.delay(order.id)
             request.session['order_id'] = order.id
-            return redirect(reverse('payment:process'))
+            return redirect(reverse('payment:payment_process'))
     else:
         if request.user.is_authenticated:
             form = OrderCreateForm(initial={
@@ -75,7 +75,7 @@ def order_complaint(request):
             complaint.email = form.cleaned_data['email']
             complaint.message = form.cleaned_data['message']
             complaint.save()
-            return redirect('profile')
+            return redirect('accounts:account_profile')
     else:
         form = OrderComplaintForm()
     return render(request, 'orders/order/order_complaint.html', {'form': form})

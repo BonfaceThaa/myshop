@@ -28,9 +28,9 @@ def payment_process(request):
             order.braintree_id = result.transaction.id
             order.save()
             payment_completed.delay(order.id)
-            return redirect('payment:done')
+            return redirect('payment:payment_done')
         else:
-            return redirect('payment:canceled')
+            return redirect('payment:payment_canceled')
     else:
         client_token = gateway.client_token.generate()
         return render(request, 'payment/payment_process.html', {'order': order, 'client_token': client_token})
