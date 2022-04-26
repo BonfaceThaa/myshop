@@ -122,7 +122,7 @@ Testing
 - coupon
     - views(coupon_apply)
 - orders
-    - views(order_create, ord_admin_pdf, order_complaint)
+    - views(ord_admin_pdf)
     - forms(OrderComplaintForm: clean_order_id)
     - signals(save_create_order_id)
 - payment
