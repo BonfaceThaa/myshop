@@ -11,3 +11,5 @@ class TestCouponModel:
         coupon = CouponFactory()
         assert Coupon.objects.count() == 1
         assert coupon.code == str(coupon)
+
+# TODO: test validators
